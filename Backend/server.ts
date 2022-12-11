@@ -51,14 +51,14 @@ app.post('/register', async (req: Request<RegisterData>, res: StatusResponse<any
         res.send({error: err.message})
     }
 })
-app.post('/login', async (req: Request<{username: string, password: string}>, res: StatusResponse<any>) => {
+app.post('/login', async (req: Request<{username: string, password: string}>, res: Response<any>) => {
     try {
         const user = await User.findOne({where: {username: req.body.username}})
         if(!user)
             throw new Error("Username does not exist")
         if(user.password != req.body.password)
             throw new Error("Passwords don't match")
-        res.send({data: user})
+        res.send(user)
     } catch (err: any) {
         res.send({error: err.message})
     }

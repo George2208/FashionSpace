@@ -12,12 +12,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public login(user: User): Observable<HttpResponse<User>> {
+  public login(user: User): Observable<HttpResponse<any>> {
     return this.http.post<User>(`${this.host}/login`, user, { observe: 'response' });
   }
 
   public register(user: User): Observable<User> {
     return this.http.post<User>(`${this.host}/register`, user);
+  }
+
+  public addUserToLocalCache(user: User): void {
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
  
