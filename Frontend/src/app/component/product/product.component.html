@@ -1,0 +1,23 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css " rel="stylesheet " integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN " crossorigin="anonymous ">
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-2" *ngFor="let product of products">
+
+            <div class="card shadow" id="card-popular">
+                <div class="inner">
+                    <img src={{product.image}} class=" card-img-top " alt="assets/image_not_found.jpg">
+
+
+                </div>
+                <div class="card-body ">
+                    <h5 class="card-title "> {{product.name}}</h5>
+                    <p class="card-text ">{{product.description}}</p>
+                    <p class="card-text ">{{product.price}} $</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -79,12 +79,12 @@ app.post('/addProduct', async (req: Request<ProductData>, res: StatusResponse<nu
         res.send({error: err.message})
     }
 })
-app.get('/productByCategory/:name', async (req: Request<{name: string}>, res: StatusResponse<any>) => {
+app.get('/productByCategory/:name', async (req: Request<{name: string}>, res: Response<any>) => {
     try {
         const category = await Category.findOne({where: {name: req.params.name}})
         if(!category)
             throw new Error("Category does not exist")
-        res.send({data: await Product.findAll({where: {CategoryId: category.id}})})
+        res.send(await Product.findAll({where: {CategoryId: category.id}}))
     } catch (err: any) {
         res.send({error: err.message})
     }

@@ -15,16 +15,16 @@
         <li class="btn"><span class="fas fa-bars"></span></li>
         <div class="items">
             <!-- <li><a href="#">Home</a></li> -->
-            <li><a href="">Descover</a></li>
+            <!-- <li><a href="">Descover</a></li> -->
 
             <div class="dropdown">
-                <li id="my-movies"><a>My Catelories</a></li>
+                <li id="my-movies"><a>Descover clothes</a></li>
 
-                <div class="dropdown-content">
+                <div class="dropdown-content" *ngFor="let category of categories">
 
-                    <p class="dropdown-item">Category 1 </p>
-                    <p class="dropdown-item">Category 2</p>
-                    <p class="dropdown-item">Category 3</p>
+                    <p class="dropdown-item">{{category.name}} </p>
+                    <p class="dropdown-item">test </p>
+                    <p class="dropdown-item">test</p>
                 </div>
 
             </div>
@@ -38,22 +38,8 @@
     </ul>
 </nav>
 
-<div class="row">
 
-    <div class="col-md-2">
 
-        <div class="card shadow" id="card-popular">
-            <div class="inner">
-                <img src="assets/test.jpg" class=" card-img-top " alt="...">
-
-            </div>
-            <div class="card-body ">
-                <h5 class="card-title "> Skirt</h5>
-                <p class="card-text ">Black skirt</p>
-                <p class="card-text ">70 $</p>
-            </div>
-
-        </div>
-    </div>
-
-</div>
+<!-- <div *ngFor="let category of categories">
+    <div class="dropdown-item">{{category.name}} </div>
+</div> -->
