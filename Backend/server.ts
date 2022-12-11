@@ -4,7 +4,25 @@ import { Category, connect, Product, User } from "./database"
 
 const app = express()
 app.use(express.json())
-const port = 8080
+const port = 8880
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    // res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
 
 interface RegisterData {
     firstName: string
@@ -24,10 +42,11 @@ type StatusResponse<T> = Response<{
     error?: string
 }>
 
-app.post('/register', async (req: Request<RegisterData>, res: StatusResponse<null>) => {
+app.post('/register', async (req: Request<RegisterData>, res: StatusResponse<any>) => {
     try {
         await User.create(req.body)
         res.send({data: null})
+        // res.send({data: req.body})
     } catch (err: any) {
         res.send({error: err.message})
     }
@@ -91,6 +110,9 @@ app.get('/products', async (req: Request, res: Response<any>) => {
     res.send(await Product.findAll({}))
 })
 
+app.get('/test', async (req: Request, res: Response<any>) => {
+    res.send("test");
+})
 connect().then(() => app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 }))
