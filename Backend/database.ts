@@ -13,6 +13,7 @@ export class Category extends Model<InferAttributes<Category>, InferCreationAttr
 }
 
 export class Product extends Model<InferAttributes<Product>, InferCreationAttributes<Product>> {
+	declare id: number
 	declare name: string
 	declare description: string
 	declare size: string
@@ -41,6 +42,10 @@ export async function connect () {
 		name: DataTypes.STRING
 	}, {sequelize})
 	Product.init({
+		id: {
+			type: DataTypes.INTEGER,
+			primaryKey: true
+		},
 		name: DataTypes.STRING,
 		description: DataTypes.STRING,
 		size: DataTypes.STRING,

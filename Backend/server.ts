@@ -1,4 +1,5 @@
 import express, {Request, Response} from "express"
+import { request } from "http"
 import { Category, connect, Product, User } from "./database"
 
 const app = express()
@@ -31,13 +32,14 @@ app.post('/register', async (req: Request<RegisterData>, res: StatusResponse<nul
         res.send({error: err.message})
     }
 })
-app.post('/login', async (req: Request<{username: string, password: string}>, res: StatusResponse<null>) => {
+app.post('/login', async (req: Request<{username: string, password: string}>, res: StatusResponse<any>) => {
     try {
         const user = await User.findOne({where: {username: req.body.username}})
         if(!user)
             throw new Error("Username does not exist")
         if(user.password != req.body.password)
             throw new Error("Passwords don't match")
+        res.send({data: user})
     } catch (err: any) {
         res.send({error: err.message})
     }
@@ -58,12 +60,20 @@ app.post('/addProduct', async (req: Request<ProductData>, res: StatusResponse<nu
         res.send({error: err.message})
     }
 })
-app.post('/products', async (req: Request<{name: string}>, res: StatusResponse<any>) => {
+app.get('/productByCategory/:name', async (req: Request<{name: string}>, res: StatusResponse<any>) => {
     try {
-        const category = await Category.findOne({where: {name: req.body.name}})
+        const category = await Category.findOne({where: {name: req.params.name}})
         if(!category)
             throw new Error("Category does not exist")
         res.send({data: await Product.findAll({where: {CategoryId: category.id}})})
+    } catch (err: any) {
+        res.send({error: err.message})
+    }
+})
+
+app.get('/product/:id', async (req: Request<any>, res: StatusResponse<any>) => {
+    try {
+        res.send({data: await Product.findOne({where: {id: req.params.id}})})
     } catch (err: any) {
         res.send({error: err.message})
     }
