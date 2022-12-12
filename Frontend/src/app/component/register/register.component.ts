@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title:   'You have been successfully authenticated!',
+            title:   'You have been successfully registered',
             showConfirmButton: false,
             timer: 3000
           })
