@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
 import { AuthService } from 'src/app/service/auth.service';
 import { CategoryService } from 'src/app/service/category.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,18 @@ export class HomeComponent {
     }, err => {
       console.log("Error while fetching data")
     });
+  }
+
+  onLogout() : void{
+    this.authService.logout();
+    this.router.navigate(['/login']);
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title:   'You have been successfully logged out',
+      showConfirmButton: false,
+      timer: 3000
+    })
   }
 
 }
