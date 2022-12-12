@@ -89,6 +89,9 @@ export class ProductComponent {
     window.location.reload();
   }
 
-
+  goToProductPage(product: Product) : void{
+    this.productService.addProductToLocalCache(product);
+    this.router.navigate(['/product-page']);
+  }
 
 }

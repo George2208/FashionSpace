@@ -33,4 +33,16 @@ export class ProductService {
   //   console.log(this.getAllProductsByCategoryIdURL)
   //   return this.http.get<Product[]>(this.getAllProductsByCategoryIdURL);
   // }
+
+  public getProductFromLocalCache(): Product {
+    return JSON.parse(localStorage.getItem('product')|| '{}');
+  }
+
+  public addProductToLocalCache(product: Product): void {
+    localStorage.setItem('product', JSON.stringify(product));
+  }
+
+  public removeProductFromLocalCache(): void {
+    localStorage.removeItem('product');
+  }
 }
