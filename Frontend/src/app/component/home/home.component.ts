@@ -25,7 +25,7 @@ export class HomeComponent {
     this.categoryService.getAllCategories().subscribe(res => {
 
       this.categories = res;
-      console.log("categories:", this.categories)
+      // console.log("categories:", this.categories)
 
     }, err => {
       console.log("Error while fetching data")
@@ -42,6 +42,11 @@ export class HomeComponent {
       showConfirmButton: false,
       timer: 3000
     })
+  }
+
+  refreshProducts(category: Category) : void{
+    this.categoryService.addCategoryToLocalCache(category);
+    this.router.navigate(['/product']);
   }
 
 }

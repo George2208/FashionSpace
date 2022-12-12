@@ -10,14 +10,27 @@ import { Product } from '../model/product';
 })
 export class ProductService {
   private host = environment.apiUrl;
-  getAllProductsByCategoryIdURL : string;
+  getAllProductsURL : string;
+  getAllProductsByCategoryNameURL : string;
 
   constructor(private http: HttpClient) { 
-    this.getAllProductsByCategoryIdURL = `${this.host}/products`;
+    this.getAllProductsURL = `${this.host}/products`;
+    this.getAllProductsByCategoryNameURL = `${this.host}/productByCategory/`;
   }
 
-  getAllProductsByCategoryId(): Observable<Product[]> {
-    console.log(this.getAllProductsByCategoryIdURL)
-    return this.http.get<Product[]>(this.getAllProductsByCategoryIdURL);
+  getAllProducts(): Observable<Product[]> {
+    console.log(this.getAllProductsURL)
+    return this.http.get<Product[]>(this.getAllProductsURL);
   }
+
+  getAllProductsByCategoryName(categoryName : string): Observable<Product[]> {
+    this.getAllProductsByCategoryNameURL += categoryName;
+    console.log(this.getAllProductsByCategoryNameURL)
+    return this.http.get<Product[]>(this.getAllProductsByCategoryNameURL);
+  }
+
+  // getAllProductsByCategoryId(): Observable<Product[]> {
+  //   console.log(this.getAllProductsByCategoryIdURL)
+  //   return this.http.get<Product[]>(this.getAllProductsByCategoryIdURL);
+  // }
 }

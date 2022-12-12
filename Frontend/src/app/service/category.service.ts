@@ -19,4 +19,16 @@ export class CategoryService {
     console.log('url', this.getAllCategoriesURL)
     return this.http.get<Category[]>(this.getAllCategoriesURL);
   }
+
+  public getCategoryFromLocalCache(): Category {
+    return JSON.parse(localStorage.getItem('category')|| '{}');
+  }
+
+  public addCategoryToLocalCache(category: Category): void {
+    localStorage.setItem('category', JSON.stringify(category));
+  }
+
+  public removeCategoryFromLocalCache(): void {
+    localStorage.removeItem('category');
+  }
 }
