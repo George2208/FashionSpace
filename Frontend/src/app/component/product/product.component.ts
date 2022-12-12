@@ -41,7 +41,7 @@ export class ProductComponent {
         this.productService.getAllProductsByCategoryName(category.name).subscribe(res => {
           this.products = res;
           this.prelucrateImages();
-          console.log("products:",  this.products);
+          console.log("productss:",  this.products);
     
         }, err => {
           console.log("Error while fetching data")

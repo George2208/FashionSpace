@@ -24,9 +24,9 @@ export class ProductService {
   }
 
   getAllProductsByCategoryName(categoryName : string): Observable<Product[]> {
-    this.getAllProductsByCategoryNameURL += categoryName;
+    // this.getAllProductsByCategoryNameURL += categoryName;
     console.log(this.getAllProductsByCategoryNameURL)
-    return this.http.get<Product[]>(this.getAllProductsByCategoryNameURL);
+    return this.http.get<Product[]>(this.getAllProductsByCategoryNameURL + categoryName);
   }
 
   // getAllProductsByCategoryId(): Observable<Product[]> {
