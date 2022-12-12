@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './component/home/home.component';
 import { ProductComponent } from './component/product/product.component';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProductComponent } from './component/product/product.component';
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    ProductComponent
+    ProductComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
