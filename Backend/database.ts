@@ -8,12 +8,11 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
 }
 
 export class Category extends Model<InferAttributes<Category>, InferCreationAttributes<Category>> {
-	declare id: number
+	declare id: CreationOptional<number>
 	declare name: string
 }
 
 export class Product extends Model<InferAttributes<Product>, InferCreationAttributes<Product>> {
-	declare id: number
 	declare name: string
 	declare description: string
 	declare size: string
@@ -23,7 +22,11 @@ export class Product extends Model<InferAttributes<Product>, InferCreationAttrib
 }
 
 export async function connect () {
-	const sequelize = new Sequelize('sqlite::memory:', {logging: undefined})
+	const sequelize = new Sequelize({
+		dialect: 'sqlite',
+  		storage: './database',
+		logging: undefined
+	})
 	User.init({
 		username: {
 			type: DataTypes.STRING,
@@ -42,10 +45,6 @@ export async function connect () {
 		name: DataTypes.STRING
 	}, {sequelize})
 	Product.init({
-		id: {
-			type: DataTypes.INTEGER,
-			primaryKey: true
-		},
 		name: DataTypes.STRING,
 		description: DataTypes.STRING,
 		size: DataTypes.STRING,
